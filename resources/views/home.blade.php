@@ -7,15 +7,15 @@
                 <painel titulo="Meu painel" cor="panel-primary">
 
                     <div class="col-md-4">
-                        <painel titulo="Conteúdo 1" cor="panel-info"></painel>
+                        <caixa titulo="Artigos" quantidade="10" url="#" cor="#00c0ef" icone="ion ion-clipboard"></caixa>
                     </div>
 
                     <div class="col-md-4">
-                        <painel titulo="Conteúdo 2" cor="panel-info"></painel>
+                        <caixa titulo="Usuários" quantidade="10" url="#" cor="#00c0ef" icone="ion ion-ios-people"></caixa>
                     </div>
 
                     <div class="col-md-4">
-                        <painel titulo="Conteúdo 3" cor="panel-info"></painel>
+                        <caixa titulo="Autores" quantidade="10" url="#" cor="#00c0ef" icone="fa fa-users"></caixa>
                     </div>
 
                 </painel>
