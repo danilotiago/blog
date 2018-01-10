@@ -4,33 +4,7 @@
     <pagina tamanho="12">
         <painel titulo="Lista de artigos" cor="panel-primary">
 
-        <a href="#">Criar</a>
-
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Título</th>
-                        <th>Descrição</th>
-                        <th>Autor</th>
-                        <th>Data publicação</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Título de teste</td>
-                        <td>Descrição de teste</td>
-                        <td>Autor de teste</td>
-                        <td>99/99/9999</td>
-                        <td>
-                            <a href="#">Editar</a> |
-                            <a href="#">Deletar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <tabela-lista v-bind:titulos="['#', 'Título', 'Descrição', 'Autor', 'Data publicação']" v-bind:itens="[ [1, 'PHP OO', 'Curso de PHP oo', 'Danilo Tiago', '99/99/9999'], [2, 'Vue js', 'Curso de vue', 'Danilo Tiago', '99/99/9999'] ]"></tabela-lista>
 
         </painel>
     </pagina>
