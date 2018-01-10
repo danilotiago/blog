@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="form-group pull-right">
+            <input type="search" v-model="buscar" class="form-control" placeholder="Buscar" />
+        </div>
 
         <table class="table table-striped table-hover">
             <thead>
@@ -9,7 +12,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(item,index) in itens">
+            <tr v-for="(item,index) in lista_busca">
                 <td v-for="dado in item">{{dado}}</td>
                 <td>
                     <a v-if="url_detalhes" v-bind:href="url_detalhes">Detalhes  |</a>
@@ -32,6 +35,11 @@
 
 <script>
     export default {
+        data: function() {
+            return {
+                buscar: ''
+            }
+        },
         props: [
             'titulos',
             'itens',
@@ -40,6 +48,19 @@
             'url_deletar',
             'token_deletar'
         ],
+        computed: {
+            lista_busca: function() {
+                return this.itens.filter(item => {
+                    item.forEach(function(dado) {
+                        if((dado + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0)
+                        {
+                            return true;
+                        }
+                    });
+                    return false;
+                });
+            }
+        },
         methods: {
             executa_form: function(index)
             {
