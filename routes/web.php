@@ -17,4 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::middleware(['auth'])
+    ->prefix('dashboard')
+    ->namespace('\\Admin')
+    ->name('dashboard.')
+    ->group(function(){
+
+        Route::resource('artigos', 'ArtigosController');
+
+});
+

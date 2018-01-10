@@ -5,7 +5,7 @@
         <painel titulo="Meu painel" cor="panel-primary">
 
             <div class="col-md-4">
-                <caixa titulo="Artigos" quantidade="10" url="#" cor="#00c0ef" icone="ion ion-clipboard"></caixa>
+                <caixa titulo="Artigos" quantidade="10" url="{{ route('dashboard.artigos.index') }}" cor="#00c0ef" icone="ion ion-clipboard"></caixa>
             </div>
 
             <div class="col-md-4">
