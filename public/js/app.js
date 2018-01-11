@@ -43903,7 +43903,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43959,12 +43959,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['titulos', 'itens', 'url_detalhes', 'url_editar', 'url_deletar', 'token_deletar'],
     computed: {
         lista_busca: function lista_busca() {
+            var _this = this;
+
+            // faz o filtro com filter nos itens para cada item
             return this.itens.filter(function (item) {
-                item.forEach(function (dado) {
-                    if ((dado + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0) {
+
+                // loop em cada posição (dado) do item
+                for (var i = 0; i < item.length; i++) {
+
+                    // converte o item para string
+                    // deixa em minusculo
+                    // indexOf faz a busca de qualquer referencia dentro de outra, se >= 0 entao
+                    // aquela referencia existe
+                    if ((item[i] + "").toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
                         return true;
                     }
-                });
+                }
                 return false;
             });
         }

@@ -37,7 +37,7 @@
     export default {
         data: function() {
             return {
-                buscar: ''
+                buscar:''
             }
         },
         props: [
@@ -50,13 +50,22 @@
         ],
         computed: {
             lista_busca: function() {
+
+                // faz o filtro com filter nos itens para cada item
                 return this.itens.filter(item => {
-                    item.forEach(function(dado) {
-                        if((dado + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0)
+
+                    // loop em cada posição (dado) do item
+                    for(let i = 0; i < item.length; i++) {
+
+                        // converte o item para string
+                        // deixa em minusculo
+                        // indexOf faz a busca de qualquer referencia dentro de outra, se >= 0 entao
+                        // aquela referencia existe
+                        if((item[i] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0)
                         {
                             return true;
                         }
-                    });
+                    }
                     return false;
                 });
             }
