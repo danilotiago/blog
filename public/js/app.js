@@ -43903,7 +43903,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43953,13 +43953,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            buscar: ''
+            buscar: '',
+            // o atributo recebera o prop ou um valor default
+            v_ordenacao_tabela: this.ordenacao_tabela || 'DESC',
+            v_indice_campo_ordenacao_tabela: this.indice_campo_ordenacao_tabela || 0
         };
     },
-    props: ['titulos', 'itens', 'url_detalhes', 'url_editar', 'url_deletar', 'token_deletar'],
+    props: ['titulos', 'itens', 'url_detalhes', 'url_editar', 'url_deletar', 'token_deletar', 'ordenacao_tabela', 'indice_campo_ordenacao_tabela'],
     computed: {
         lista_busca: function lista_busca() {
             var _this = this;
+
+            // chamada do metodo de ordenacao da tabela
+            this.ordena_tabela();
 
             // faz o filtro com filter nos itens para cada item
             return this.itens.filter(function (item) {
@@ -43982,6 +43988,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         executa_form: function executa_form(index) {
             document.getElementById('form-delete-' + index).submit();
+        },
+
+        //  recebe o indice da coluna que foi clicado
+        recebe_indice_coluna_ordenacao: function recebe_indice_coluna_ordenacao(indice_coluna) {
+            // atribui o indice da coluna selecionada
+            this.v_indice_campo_ordenacao_tabela = parseInt(indice_coluna);
+            // troca a ordenacao as, desc
+            this.troca_ordem();
+        },
+
+        // caso desc vai pra asc e vice-versa do atributo do vue
+        troca_ordem: function troca_ordem() {
+            if (this.v_ordenacao_tabela.toLowerCase() == 'asc') {
+                this.v_ordenacao_tabela = 'desc';
+            } else {
+                this.v_ordenacao_tabela = 'asc';
+            }
+        },
+
+        // faz a ordenacao da tabela dos itens do array
+        ordena_tabela: function ordena_tabela() {
+            // var local para pegar o indice de ordenacao
+            var campo = this.v_indice_campo_ordenacao_tabela;
+
+            // ordena em crescente
+            if (this.v_ordenacao_tabela == 'asc') {
+                // sort para crescente
+                this.itens.sort(function (a, b) {
+                    if (a[campo] > b[campo]) return 1;
+                    if (a[campo] < b[campo]) return -1;
+                    return 0;
+                });
+            } else // ordena em decrescente
+                {
+                    // sort para decrescente
+                    this.itens.sort(function (a, b) {
+                        if (a[campo] < b[campo]) return 1;
+                        if (a[campo] > b[campo]) return -1;
+                        return 0;
+                    });
+                }
         }
     }
 });
@@ -44024,8 +44071,19 @@ var render = function() {
         _c(
           "tr",
           [
-            _vm._l(_vm.titulos, function(titulo) {
-              return _c("th", [_vm._v(_vm._s(titulo))])
+            _vm._l(_vm.titulos, function(titulo, index) {
+              return _c(
+                "th",
+                {
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      _vm.recebe_indice_coluna_ordenacao(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(titulo))]
+              )
             }),
             _vm._v(" "),
             _c("th", [_vm._v("Ação")])
